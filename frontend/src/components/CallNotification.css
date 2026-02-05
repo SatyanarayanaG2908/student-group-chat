@@ -1,0 +1,217 @@
+/* file: frontend/src/components/CallNotification.css */
+
+.call-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    transform: translateX(400px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.call-notification.visible {
+    transform: translateX(0);
+}
+
+.call-notification-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    min-width: 320px;
+    position: relative;
+    overflow: hidden;
+}
+
+.call-notification-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    animation: pulse-ring 2s ease-out infinite;
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+.call-notification-header {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.call-type-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+    animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.call-notification-info {
+    flex: 1;
+    color: white;
+}
+
+.call-notification-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.caller-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: white;
+}
+
+.group-name {
+    font-size: 14px;
+    opacity: 0.8;
+    color: white;
+}
+
+.call-notification-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.call-action-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.call-action-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.call-action-btn:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.call-action-btn.decline {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.call-action-btn.decline:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+.call-action-btn.decline:active {
+    transform: scale(0.95);
+}
+
+.call-action-btn.accept {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    animation: pulse-accept 2s ease-in-out infinite;
+}
+
+.call-action-btn.accept:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    animation: none;
+}
+
+.call-action-btn.accept:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse-ring {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+@keyframes bounce-gentle {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulse-accept {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.6);
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .call-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+
+    .call-notification-content {
+        min-width: auto;
+        padding: 16px;
+    }
+
+    .call-type-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .caller-name {
+        font-size: 18px;
+    }
+
+    .call-action-btn {
+        width: 48px;
+        height: 48px;
+    }
+}
